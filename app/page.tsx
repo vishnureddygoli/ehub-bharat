@@ -8,6 +8,10 @@ import {
   SectionIntro,
   SiteFrame,
 } from "./components/SiteFrame";
+import {
+  ExecutiveAssurance,
+  ProcurementConfidenceMatrix,
+} from "./components/AssuranceBlocks";
 import { FleetChargingEstimator } from "./components/GovernmentDeskForm";
 import {
   GovernmentSolutionSelector,
@@ -93,6 +97,8 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <ExecutiveAssurance />
 
       <section className="content-band">
         <div className="site-container">
@@ -219,6 +225,8 @@ export default function Home() {
           <SiteReadinessChecklist />
         </div>
       </section>
+
+      <ProcurementConfidenceMatrix />
 
       <section className="content-band content-band--ink">
         <div className="site-container projects-framework">

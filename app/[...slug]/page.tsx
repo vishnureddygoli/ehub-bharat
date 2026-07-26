@@ -3,6 +3,12 @@ import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import { GovernmentDeskForm, FleetChargingEstimator } from "../components/GovernmentDeskForm";
 import {
+  BriefingSequence,
+  ExecutiveAssurance,
+  ProcurementConfidenceMatrix,
+  TenderEvaluationChecklist,
+} from "../components/AssuranceBlocks";
+import {
   ChargerComparison,
   LifecycleTimeline,
   OperationsPlatformView,
@@ -435,6 +441,7 @@ function GovernmentHub() {
           </div>
         </div>
       </section>
+      <ExecutiveAssurance />
       <LifecycleTimeline />
       <section className="content-band">
         <div className="site-container two-column">
@@ -449,6 +456,7 @@ function GovernmentHub() {
           <SiteReadinessChecklist />
         </div>
       </section>
+      <ProcurementConfidenceMatrix />
       <section className="content-band content-band--warm">
         <div className="site-container">
           <OperationsPlatformView />
@@ -583,6 +591,7 @@ function ManufacturingPage() {
           </div>
         </div>
       </section>
+      <ProcurementConfidenceMatrix />
       <section className="content-band">
         <div className="site-container two-column">
           <div>
@@ -861,39 +870,44 @@ function TenderDeskPage() {
   ];
 
   return (
-    <section className="content-band">
-      <div className="site-container tender-grid">
-        <div>
-          <SectionIntro
-            eyebrow="Public Downloads"
-            title="Start evaluation with reviewed public documents."
-            summary="Sensitive or confidential documents are handled through request, not exposed publicly."
-          />
-          <div className="download-panel download-panel--large">
-            {publicDocs.map((doc) => (
-              <Link key={doc.href} href={doc.href}>
-                {doc.label}
-              </Link>
-            ))}
+    <>
+      <section className="content-band">
+        <div className="site-container tender-grid">
+          <div>
+            <SectionIntro
+              eyebrow="Public Downloads"
+              title="Start evaluation with reviewed public documents."
+              summary="Sensitive or confidential documents are handled through request, not exposed publicly."
+            />
+            <div className="download-panel download-panel--large">
+              {publicDocs.map((doc) => (
+                <Link key={doc.href} href={doc.href}>
+                  {doc.label}
+                </Link>
+              ))}
+            </div>
+            <BriefingSequence />
+          </div>
+          <div className="evidence-box">
+            <h2>Secure Document Request</h2>
+            <p>
+              Use the Government Project Desk for documents that require review,
+              approval or secure exchange.
+            </p>
+            <ul>
+              {requestDocs.map((doc) => (
+                <li key={doc}>{doc}</li>
+              ))}
+            </ul>
+            <Link className="button button--primary" href="/contact/government-project-desk">
+              Request Tender Documents
+            </Link>
           </div>
         </div>
-        <div className="evidence-box">
-          <h2>Secure Document Request</h2>
-          <p>
-            Use the Government Project Desk for documents that require review,
-            approval or secure exchange.
-          </p>
-          <ul>
-            {requestDocs.map((doc) => (
-              <li key={doc}>{doc}</li>
-            ))}
-          </ul>
-          <Link className="button button--primary" href="/contact/government-project-desk">
-            Request Tender Documents
-          </Link>
-        </div>
-      </div>
-    </section>
+      </section>
+      <TenderEvaluationChecklist />
+      <ProcurementConfidenceMatrix />
+    </>
   );
 }
 

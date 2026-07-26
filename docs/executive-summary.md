@@ -11,6 +11,7 @@ The website has been rebuilt around a government-first institutional narrative:
 - The Telangana EV charger manufacturing facility is prominently presented using the supplied address.
 - Private-sector pathways remain available, but they are secondary to government, institutional and public-infrastructure project flows.
 - The Government Project Desk form replaces generic partner language on the primary conversion path.
+- The release now includes executive assurance, procurement confidence, tender evaluation and controlled-evidence sections for government reviewers.
 
 ## Public deliverables
 
@@ -26,6 +27,11 @@ The website has been rebuilt around a government-first institutional narrative:
   - Government Capability Statement
   - Manufacturing Profile
   - Printer-Friendly Government Project Summary
+- Public-sector assurance content:
+  - Executive Assurance
+  - Procurement Confidence Matrix
+  - Tender Evaluation Checklist
+  - Government briefing sequence
 
 ## Claim-control decision
 

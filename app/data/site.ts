@@ -64,6 +64,171 @@ export const proofPoints = [
   "India-focused deployment and support model",
 ];
 
+export const assurancePrinciples = [
+  {
+    title: "Evidence-led public claims",
+    summary:
+      "The website separates verified public claims from documents that require approval before publication.",
+    signal: "No invented capacity, certifications, contracts or ratings",
+  },
+  {
+    title: "Procurement-ready structure",
+    summary:
+      "Government pages are organized around use case, project stage, commercial model, O&M responsibility and records.",
+    signal: "Built for EOI, RFI, RFP and tender screening",
+  },
+  {
+    title: "Manufacturing accountability",
+    summary:
+      "The Telangana manufacturing facility is presented with the supplied address and a clear verification pathway.",
+    signal: "Factory visit and manufacturing profile path available",
+  },
+  {
+    title: "Lifecycle ownership",
+    summary:
+      "Planning, manufacturing, deployment and operations are connected into one evaluation narrative.",
+    signal: "Plan - Manufacture - Deploy - Operate",
+  },
+  {
+    title: "Secure document discipline",
+    summary:
+      "Sensitive tender documents, datasheets and registrations are requested through review instead of public exposure.",
+    signal: "Controlled document exchange before confidential material",
+  },
+  {
+    title: "Accessible public record",
+    summary:
+      "Public routes, downloads, legal pages, metadata, sitemap, redirects and form validation are maintained as launch assets.",
+    signal: "Search, procurement and accessibility basics covered",
+  },
+];
+
+export const procurementReadinessMatrix = [
+  {
+    area: "Manufacturing facility",
+    publicEvidence: "Facility address and manufacturing role are published.",
+    controlledEvidence:
+      "Factory photographs, operating-rights evidence, process records, capacity and certifications after approval.",
+    committeeUse:
+      "Initial source-of-supply screening and factory-visit planning.",
+  },
+  {
+    area: "EV charger categories",
+    publicEvidence: "AC, DC fast and high-power charging categories are described.",
+    controlledEvidence:
+      "Model datasheets, output ratings, connector details, compliance documents and warranty terms.",
+    committeeUse:
+      "Technical pre-screening before formal specification matching.",
+  },
+  {
+    area: "Government project delivery",
+    publicEvidence:
+      "Use cases, lifecycle stages, commercial model options and O&M considerations are published.",
+    controlledEvidence:
+      "Approved project records, client permissions, photos, scope documents and outcome metrics.",
+    committeeUse:
+      "Market sounding, DPR support conversations and delivery-method review.",
+  },
+  {
+    area: "Operations and reporting",
+    publicEvidence:
+      "Monitoring, OCPP-compatible operations where supported, payments and reporting areas are described.",
+    controlledEvidence:
+      "Project-specific dashboards, SLA terms, uptime history and integration documents.",
+    committeeUse:
+      "O&M evaluation, escalation planning and reporting-cadence review.",
+  },
+  {
+    area: "Commercial structure",
+    publicEvidence:
+      "CAPEX, EPC, EPC plus O&M, PPP, concession and managed-service models are compared.",
+    controlledEvidence:
+      "Commercial proposal, pricing, risk allocation and legal terms after formal review.",
+    committeeUse:
+      "Procurement-model shortlisting and internal finance discussion.",
+  },
+];
+
+export const tenderEvaluationChecklist = [
+  {
+    title: "Technical fit",
+    items: [
+      "Charger category and connector requirements",
+      "Electrical readiness and sanctioned load assumptions",
+      "Software, monitoring and interoperability needs",
+      "Testing, commissioning and acceptance criteria",
+    ],
+  },
+  {
+    title: "Manufacturing evidence",
+    items: [
+      "Facility address and visit pathway",
+      "Approved product datasheets",
+      "Quality and test-record availability",
+      "Warranty, service and spare-parts documentation",
+    ],
+  },
+  {
+    title: "Project delivery",
+    items: [
+      "Scope split across agency, site owner, utility and operator",
+      "Milestones, approvals and handover records",
+      "Civil, electrical, charger and software coordination",
+      "Risk, dependency and escalation matrix",
+    ],
+  },
+  {
+    title: "Operations",
+    items: [
+      "Preventive and corrective maintenance workflow",
+      "Fault response and incident reporting cadence",
+      "Energy, session and revenue reconciliation",
+      "Role-based reporting for public agencies",
+    ],
+  },
+  {
+    title: "Commercial and legal",
+    items: [
+      "Ownership, investment and operating responsibility",
+      "Tariff, revenue-share or service-fee mechanism",
+      "Document exchange and confidentiality workflow",
+      "No implied government endorsement without evidence",
+    ],
+  },
+  {
+    title: "Sustainability",
+    items: [
+      "Solar and BESS suitability review",
+      "Peak load and resilience considerations",
+      "Land, safety and user-access planning",
+      "Future expansion and lifecycle reporting",
+    ],
+  },
+];
+
+export const briefingSequence = [
+  {
+    title: "1. Intake",
+    summary:
+      "Agency shares use case, procurement stage, locations, fleet or public-demand context and document needs.",
+  },
+  {
+    title: "2. Screening",
+    summary:
+      "EHUB Bharat reviews project fit, site-readiness gaps, required product evidence and secure document workflow.",
+  },
+  {
+    title: "3. Technical discussion",
+    summary:
+      "Teams discuss charger categories, power readiness, software expectations, O&M scope and manufacturing questions.",
+  },
+  {
+    title: "4. Formal pathway",
+    summary:
+      "The conversation moves into factory visit, market consultation, EOI, RFI, RFP, tender or pilot evaluation as appropriate.",
+  },
+];
+
 export const deliveryPillars = [
   {
     title: "Plan",

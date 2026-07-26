@@ -3,6 +3,7 @@ from __future__ import annotations
 import shutil
 from pathlib import Path
 from textwrap import wrap
+from xml.sax.saxutils import escape
 
 from PIL import Image, ImageDraw, ImageFont
 from reportlab.lib import colors
@@ -107,11 +108,11 @@ def make_pdf(filename: str, title: str, sections: list[tuple[str, list[str]]]) -
         subject=title,
     )
     s = styles()
-    story = [Paragraph(title, s["title"])]
+    story = [Paragraph(escape(title), s["title"])]
     for heading, paragraphs in sections:
-        story.append(Paragraph(heading, s["h2"]))
+        story.append(Paragraph(escape(heading), s["h2"]))
         for paragraph in paragraphs:
-            story.append(Paragraph(paragraph, s["body"]))
+            story.append(Paragraph(escape(paragraph), s["body"]))
     story.append(Spacer(1, 6))
     story.append(
         Paragraph(
@@ -147,6 +148,13 @@ def make_documents() -> None:
                 [
                     f"EHUB Bharat presents its own EV charger manufacturing facility at: {ADDRESS}",
                     "Published product and manufacturing claims are limited to verified categories and process descriptions until approved datasheets, test records, certifications and capacity documents are available.",
+                ],
+            ),
+            (
+                "Procurement confidence",
+                [
+                    "Public evidence includes the manufacturing address, delivery lifecycle, government use cases, charger categories, commercial model options, downloads and enquiry pathway.",
+                    "Controlled evidence includes product datasheets, certifications, project records, factory photographs, commercial proposals, SLA terms and confidential tender materials after approval.",
                 ],
             ),
             (
@@ -194,6 +202,12 @@ def make_documents() -> None:
                     "Facility ownership or operating rights, factory photographs, floor area, production lines, installed machinery, testing equipment, quality certifications, product compliance, product test reports, environmental approvals, warranty process, local-content declarations, component sourcing, annual capacity, service network and spare-parts inventory.",
                 ],
             ),
+            (
+                "Controlled publication rule",
+                [
+                    "Manufacturing evidence should be reviewed before public use. The website should not publish capacity, certification, product-rating or project-performance claims until source records are approved.",
+                ],
+            ),
         ],
     )
 
@@ -217,6 +231,12 @@ def make_documents() -> None:
                 "Governance",
                 [
                     "Recommended project records include milestone logs, responsibility matrix, site documentation, commissioning records, SLA reporting where contracted, uptime and incident reporting, energy reporting, revenue reconciliation, asset lifecycle records and periodic government reports.",
+                ],
+            ),
+            (
+                "Tender evaluation checklist",
+                [
+                    "Committees should review technical fit, manufacturing evidence, project-delivery responsibility, O&M workflow, commercial model, confidentiality process, sustainability considerations and expansion planning.",
                 ],
             ),
             (

@@ -452,6 +452,12 @@ p {
   background: var(--paper);
 }
 
+.content-band--assurance {
+  background:
+    linear-gradient(180deg, rgba(19, 121, 91, 0.06), rgba(194, 138, 49, 0.08)),
+    var(--surface);
+}
+
 .content-band--ink,
 .final-cta {
   background:
@@ -506,7 +512,11 @@ p {
 .article-grid,
 .process-grid,
 .capability-grid,
-.solution-detail-grid {
+.solution-detail-grid,
+.assurance-grid,
+.matrix-grid,
+.evaluation-grid,
+.briefing-sequence {
   display: grid;
   gap: 18px;
 }
@@ -523,6 +533,10 @@ p {
 .detail-block,
 .contact-card,
 .evidence-box,
+.assurance-card,
+.matrix-card,
+.evaluation-card,
+.briefing-sequence article,
 .tool-panel,
 .selector-detail,
 .comparison-card,
@@ -538,6 +552,50 @@ p {
 .pillar-card {
   min-height: 380px;
   padding: 24px;
+}
+
+.assurance-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.assurance-card,
+.matrix-card,
+.evaluation-card,
+.briefing-sequence article {
+  padding: 22px;
+}
+
+.assurance-card {
+  border-left: 5px solid var(--red);
+}
+
+.assurance-card span {
+  display: inline-flex;
+  border-radius: 6px;
+  background: #fff2e0;
+  color: #7b251f;
+  padding: 7px 9px;
+  font-size: 0.78rem;
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.assurance-card h3,
+.matrix-card h3,
+.evaluation-card h3,
+.briefing-sequence h3 {
+  margin: 16px 0 10px;
+  color: var(--ink);
+  font-size: 1.08rem;
+  line-height: 1.3;
+}
+
+.assurance-card p,
+.matrix-card dd,
+.evaluation-card li,
+.briefing-sequence p {
+  color: var(--muted);
+  line-height: 1.6;
 }
 
 .pillar-card > span {
@@ -660,7 +718,8 @@ p {
 .selector-detail dl,
 .model-card dl,
 .definition-list,
-.comparison-card dl {
+.comparison-card dl,
+.matrix-card dl {
   display: grid;
   gap: 14px;
   margin: 18px 0 0;
@@ -669,7 +728,8 @@ p {
 .selector-detail dt,
 .model-card dt,
 .definition-list dt,
-.comparison-card dt {
+.comparison-card dt,
+.matrix-card dt {
   color: var(--ink);
   font-weight: 900;
 }
@@ -677,7 +737,8 @@ p {
 .selector-detail dd,
 .model-card dd,
 .definition-list dd,
-.comparison-card dd {
+.comparison-card dd,
+.matrix-card dd {
   margin: 4px 0 0;
   color: var(--muted);
   line-height: 1.55;
@@ -904,6 +965,25 @@ address,
   grid-template-columns: repeat(3, 1fr);
 }
 
+.matrix-grid,
+.evaluation-grid {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.evaluation-card ul {
+  margin: 16px 0 0;
+  padding-left: 18px;
+}
+
+.evaluation-card li + li {
+  margin-top: 8px;
+}
+
+.briefing-sequence {
+  margin-top: 24px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .solution-card,
 .article-card,
 .process-grid article,
@@ -1117,6 +1197,29 @@ address,
   font-weight: 800;
 }
 
+.form-aftercare {
+  margin-top: 18px;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+
+.form-aftercare h3 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+
+.form-aftercare ol {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 21px;
+}
+
+.form-aftercare li {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
 .contact-card {
   display: grid;
   gap: 10px;
@@ -1275,7 +1378,9 @@ address,
   .article-grid,
   .solution-card-grid,
   .process-grid,
-  .capability-grid {
+  .capability-grid,
+  .assurance-grid,
+  .briefing-sequence {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -1352,6 +1457,8 @@ address,
   .solution-card-grid,
   .process-grid,
   .capability-grid,
+  .assurance-grid,
+  .briefing-sequence,
   .compact-link-grid,
   .form-grid,
   .estimator-grid,

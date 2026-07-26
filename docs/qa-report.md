@@ -13,6 +13,10 @@ Last reviewed: 2026-07-26
 - PDF text extraction: passed for all three public PDF downloads.
 - PDF render inspection: passed after rendering PDFs to PNG.
 - Static route crawl for important public paths: passed with HTTP 200 responses.
+- Executive Assurance and Procurement Confidence Matrix content checks: passed.
+- Security header smoke checks: passed for CSP, frame, content-type and referrer policy headers.
+- Public download and social-card asset checks: passed.
+- Dynamic-port test harness: added to avoid false results from unrelated local servers.
 
 ## Critical journeys covered by implementation
 

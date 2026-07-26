@@ -98,8 +98,8 @@ export function GovernmentDeskForm() {
   }
 
   return (
-    <form className="project-form" onSubmit={handleSubmit} noValidate>
-      <p className="form-note">
+    <form className="project-form" onSubmit={handleSubmit} aria-describedby="government-project-note">
+      <p className="form-note" id="government-project-note">
         Use an official work email where possible. Sensitive or confidential
         documents should be shared only after EHUB Bharat confirms the secure
         document exchange process.
@@ -153,6 +153,14 @@ export function GovernmentDeskForm() {
       <div className={`form-status form-status--${status.state}`} role="status" aria-live="polite">
         {status.message}
         {status.state === "success" ? <strong> Reference: {status.reference}</strong> : null}
+      </div>
+      <div className="form-aftercare" aria-label="What happens after submission">
+        <h3>After submission</h3>
+        <ol>
+          <li>EHUB Bharat screens the request category, procurement stage and document needs.</li>
+          <li>The team confirms whether a briefing, factory visit or secure document exchange is appropriate.</li>
+          <li>Any technical, commercial or tender material is shared only after review and approval.</li>
+        </ol>
       </div>
     </form>
   );

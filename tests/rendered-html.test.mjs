@@ -1,12 +1,15 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
+import { createServer } from "node:net";
 import { after, before, describe, test } from "node:test";
 
-const port = 3100;
-const baseUrl = `http://127.0.0.1:${port}`;
+let port;
+let baseUrl;
 let server;
 
 before(async () => {
+  port = await getAvailablePort();
+  baseUrl = `http://127.0.0.1:${port}`;
   server = spawn("npm", ["run", "start"], {
     env: { ...process.env, PORT: String(port) },
     stdio: ["ignore", "pipe", "pipe"],
@@ -47,20 +50,79 @@ describe("EHUB Bharat production smoke test", () => {
     }
   });
 
+  test("homepage presents assurance and procurement confidence content", async () => {
+    const response = await fetch(`${baseUrl}/`);
+    const html = await response.text();
+
+    assert.equal(response.status, 200);
+    assert.match(html, /Executive Assurance/);
+    assert.match(html, /Procurement Confidence Matrix/);
+    assert.match(html, /No invented capacity, certifications, contracts or ratings/);
+  });
+
+  test("important security headers are present", async () => {
+    const response = await fetch(`${baseUrl}/`);
+
+    assert.equal(response.status, 200);
+    assert.ok(response.headers.get("content-security-policy"));
+    assert.equal(response.headers.get("x-content-type-options"), "nosniff");
+    assert.equal(response.headers.get("x-frame-options"), "DENY");
+    assert.equal(response.headers.get("referrer-policy"), "strict-origin-when-cross-origin");
+  });
+
+  test("public downloads and social cards are available", async () => {
+    const assets = [
+      "/downloads/ehub-bharat-government-capability-statement.pdf",
+      "/downloads/ehub-bharat-manufacturing-profile.pdf",
+      "/downloads/ehub-bharat-government-project-summary.pdf",
+      "/og-government-projects.png",
+      "/og-manufacturing.png",
+    ];
+
+    for (const asset of assets) {
+      const response = await fetch(`${baseUrl}${asset}`);
+      assert.equal(response.status, 200, asset);
+      const body = await response.arrayBuffer();
+      assert.ok(body.byteLength > 1000, asset);
+    }
+  });
+
   test("legacy URLs return 301 redirects", async () => {
     const routes = new Map([
       ["/charging-solutions", "/government-ev-infrastructure"],
+      ["/public-charging-network", "/government-ev-infrastructure"],
       ["/apartment-ev-charging", "/apartments"],
       ["/fleet-charging", "/private-fleets"],
+      ["/retail-host-partnership", "/retail-hosts"],
+      ["/franchise-partner-with-us", "/franchise"],
+      ["/bess-and-solar-energy", "/energy-bess"],
+      ["/technology-platform", "/technology"],
+      ["/operator-dashboard", "/technology"],
       ["/pricing-business-models", "/ppp-commercial-models"],
       ["/contact", "/contact/government-project-desk"],
+      ["/blog", "/knowledge-centre"],
+      ["/faq", "/knowledge-centre"],
+      ["/ev-charging-stations-hyderabad", "/government-ev-infrastructure"],
+      ["/apartment-ev-charging-hyderabad", "/apartments"],
+      ["/fleet-ev-charging-hyderabad", "/private-fleets"],
+      ["/ev-charging-franchise-india", "/franchise"],
+      ["/ev-charger-installation-india", "/ev-chargers"],
+      ["/ocpp-ev-charging-software-india", "/technology"],
+      ["/upi-qr-ev-charging-india", "/technology"],
+      ["/bess-solar-ev-charging-india", "/energy-bess"],
+      ["/retail-host-ev-charging-india", "/retail-hosts"],
+      ["/highway-ev-charging-hubs-india", "/government/highway-corridor-charging"],
       ["/blog/ocpp-16j-vs-201-cpos-india", "/knowledge-centre"],
+      ["/blog/upi-qr-payment-flow-ev-charging-india", "/knowledge-centre"],
+      ["/blog/apartment-ev-charging-india-guide", "/apartments"],
+      ["/blog/ev-charging-franchise-india-explained", "/franchise"],
+      ["/blog/ocpp-qr-upi-ev-charging-software", "/technology"],
     ]);
 
     for (const [source, destination] of routes) {
       const response = await fetch(`${baseUrl}${source}`, { redirect: "manual" });
       assert.equal(response.status, 301, source);
-      assert.equal(new URL(response.headers.get("location")).pathname, destination);
+      assert.equal(new URL(response.headers.get("location"), baseUrl).pathname, destination);
     }
   });
 
@@ -107,10 +169,30 @@ async function waitForServer() {
     }
     try {
       const response = await fetch(baseUrl);
-      if (response.status === 200) return;
+      if (response.status === 200) {
+        const html = await response.text();
+        if (html.includes("EHUB Bharat")) return;
+      }
     } catch {
       await new Promise((resolve) => setTimeout(resolve, 500));
     }
   }
   throw new Error("Timed out waiting for production server.");
+}
+
+async function getAvailablePort() {
+  return await new Promise((resolve, reject) => {
+    const probe = createServer();
+    probe.on("error", reject);
+    probe.listen(0, "127.0.0.1", () => {
+      const address = probe.address();
+      probe.close(() => {
+        if (typeof address === "object" && address) {
+          resolve(address.port);
+        } else {
+          reject(new Error("Unable to allocate an available port."));
+        }
+      });
+    });
+  });
 }
