@@ -32,6 +32,7 @@ import {
   downloads,
   governmentSolutions,
   knowledgeArticles,
+  lifecycleSteps,
   manufacturingAddress,
   redirects,
   siteDate,
@@ -58,6 +59,14 @@ type StaticPage = {
     | "about"
     | "contact"
     | "private"
+    | "operations"
+    | "mis"
+    | "methodology"
+    | "compliance"
+    | "leadership"
+    | "careers"
+    | "resources"
+    | "sitemap"
     | "legal";
 };
 
@@ -117,6 +126,78 @@ const staticPages: StaticPage[] = [
     description:
       "A transparent project framework with status labels and evidence rules. The page avoids invented case studies until approved project records are available.",
     kind: "projects",
+  },
+  {
+    path: "/operations-maintenance",
+    eyebrow: "Operations and Maintenance",
+    title: "O&M and SLA Framework for Public Charging",
+    description:
+      "How EHUB Bharat structures preventive and corrective maintenance, fault response, uptime reporting and escalation for government and institutional charging assets.",
+    kind: "operations",
+  },
+  {
+    path: "/government-mis-reporting",
+    eyebrow: "MIS and Reporting",
+    title: "Government MIS and Reporting for EV Charging",
+    description:
+      "Sample management-information and reporting views for public agencies: site readiness, uptime, energy, utilisation, settlement, safety and asset records. All samples are illustrative.",
+    kind: "mis",
+  },
+  {
+    path: "/project-development",
+    eyebrow: "Project Development",
+    title: "EV Charging Project-Development Methodology",
+    description:
+      "A disciplined, stage-gated methodology from stakeholder alignment and feasibility through manufacturing, deployment, commissioning and lifecycle operations.",
+    kind: "methodology",
+  },
+  {
+    path: "/compliance-certifications",
+    eyebrow: "Compliance and Certifications",
+    title: "Compliance, Standards and Certification Approach",
+    description:
+      "The standards and approvals EHUB Bharat designs projects to align with, and a controlled register for certifications published only when evidence is available.",
+    kind: "compliance",
+  },
+  {
+    path: "/leadership",
+    eyebrow: "Leadership and Governance",
+    title: "Leadership and Governance",
+    description:
+      "EHUB Bharat's governance approach for public-sector delivery. Leadership profiles are published only after names, roles and photographs are approved.",
+    kind: "leadership",
+  },
+  {
+    path: "/careers",
+    eyebrow: "Careers",
+    title: "Careers at EHUB Bharat",
+    description:
+      "Build India's public EV charging and manufacturing capability. Register interest for engineering, manufacturing, project-delivery, software and field-operations roles.",
+    kind: "careers",
+  },
+  {
+    path: "/resources",
+    eyebrow: "Resources",
+    title: "Resources and Government Downloads",
+    description:
+      "Capability statement, manufacturing profile, project summary and planning notes for government and institutional evaluation, with a secure route for controlled documents.",
+    kind: "resources",
+  },
+  {
+    path: "/sitemap",
+    eyebrow: "Sitemap",
+    title: "Website Sitemap",
+    description:
+      "A human-readable index of the EHUB Bharat website for government, manufacturing, technology, commercial and policy sections.",
+    kind: "sitemap",
+  },
+  {
+    path: "/cookies",
+    eyebrow: "Policy",
+    title: "Cookie Notice",
+    description:
+      "How the EHUB Bharat website uses cookies and similar technologies, and the privacy-conscious approach to analytics.",
+    kind: "legal",
   },
   {
     path: "/tender-rfp-desk",
@@ -377,6 +458,22 @@ function renderPage(page: StaticPage, path: string) {
       return <CommercialModelsPage />;
     case "projects":
       return <ProjectsPage />;
+    case "operations":
+      return <OperationsMaintenancePage />;
+    case "mis":
+      return <GovernmentMisPage />;
+    case "methodology":
+      return <ProjectDevelopmentPage />;
+    case "compliance":
+      return <CompliancePage />;
+    case "leadership":
+      return <LeadershipPage />;
+    case "careers":
+      return <CareersPage />;
+    case "resources":
+      return <ResourcesPage />;
+    case "sitemap":
+      return <SitemapPage />;
     case "tender":
       return <TenderDeskPage />;
     case "knowledge":
@@ -1099,6 +1196,12 @@ function LegalPage({ page }: { page: StaticPage }) {
       "Please do not submit production secrets, confidential tender documents or personal data through insecure channels.",
       "The site uses security headers, origin checks, file-size and file-type restrictions for initial uploads, and no public stack traces.",
     ],
+    "/cookies": [
+      "The EHUB Bharat website is designed to work without advertising or cross-site tracking cookies. Strictly necessary cookies may be used to keep the site secure and functioning.",
+      "If privacy-conscious analytics are introduced, this notice will be updated to describe what is measured and how consent is handled, in line with applicable law.",
+      "No analytics or marketing technology is added without prior approval, and enquiry form data is never sent to analytics platforms.",
+      `Questions about cookies and privacy may be sent to ${brand.email}.`,
+    ],
   };
 
   return (
@@ -1109,6 +1212,468 @@ function LegalPage({ page }: { page: StaticPage }) {
           <p key={paragraph}>{paragraph}</p>
         ))}
         <p>Last reviewed: {siteDate}.</p>
+      </div>
+    </section>
+  );
+}
+
+function OperationsMaintenancePage() {
+  const slaAreas = [
+    {
+      title: "Preventive maintenance",
+      text: "Scheduled inspection of chargers, connectors, cooling, enclosures, earthing and signage, with a documented checklist and service history per site.",
+    },
+    {
+      title: "Corrective maintenance",
+      text: "Fault diagnosis, spare-part replacement and repair against an agreed response and resolution window, with root-cause notes for recurring issues.",
+    },
+    {
+      title: "Remote monitoring",
+      text: "OCPP-based status, heartbeat and fault alerts where supported, so many issues are identified before a site visit is required.",
+    },
+    {
+      title: "Uptime and reporting",
+      text: "Availability, downtime and incident reporting at the cadence agreed with the agency, with a transparent method for how uptime is calculated.",
+    },
+    {
+      title: "Escalation",
+      text: "A defined escalation matrix across field team, operations and the agency's nominated owner, with severity levels and contact points.",
+    },
+    {
+      title: "Spares and warranty",
+      text: "Spare-part availability planning and warranty administration, with clear boundaries between warranty, AMC and out-of-scope work.",
+    },
+  ];
+
+  return (
+    <>
+      <section className="content-band">
+        <div className="site-container two-column">
+          <div>
+            <SectionIntro
+              eyebrow="Lifecycle Ownership"
+              title="Operations do not end at commissioning."
+              summary="Public charging assets need dependable operations, transparent reporting and a clear maintenance owner for years after installation. EHUB Bharat structures O&M so an agency can evaluate service quality, not just equipment supply."
+            />
+            <ul className="check-list">
+              <li>Defined SLA targets agreed with the agency, not implied</li>
+              <li>Auditable service records per site and per asset</li>
+              <li>Clear scope split across warranty, AMC and project works</li>
+              <li>Reporting formats suitable for public review</li>
+            </ul>
+          </div>
+          <div className="evidence-box">
+            <h2>Service Boundaries</h2>
+            <p>
+              SLA windows, penalties, uptime definitions and spares
+              responsibility are set per contract and site. Published figures are
+              not a guarantee for any specific project until agreed in writing.
+            </p>
+            <Link className="button button--secondary" href="/contact/government-project-desk">
+              Discuss an O&amp;M Scope
+            </Link>
+          </div>
+        </div>
+      </section>
+      <section className="content-band content-band--warm">
+        <div className="site-container">
+          <SectionIntro
+            eyebrow="O&M Framework"
+            title="What a public O&M engagement covers."
+            summary="Each area is scoped, measured and reported. The specific targets depend on charger type, site conditions, utilisation and the agreed commercial model."
+          />
+          <div className="process-grid">
+            {slaAreas.map((area) => (
+              <article key={area.title}>
+                <h3>{area.title}</h3>
+                <p>{area.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function GovernmentMisPage() {
+  const reports = [
+    { name: "Site readiness", detail: "Status of land, power, civil and approvals per planned location." },
+    { name: "Charger uptime and downtime", detail: "Availability and outage windows with the calculation method stated." },
+    { name: "Energy delivered", detail: "kWh dispensed by site, charger and period." },
+    { name: "Session count and utilisation", detail: "Sessions, average duration and utilisation trends." },
+    { name: "Revenue and settlement", detail: "Collections, tariff, and revenue-share or settlement lines where applicable." },
+    { name: "Fault and maintenance history", detail: "Tickets raised, response and resolution, and recurring faults." },
+    { name: "SLA compliance", detail: "Performance against agreed uptime and response targets." },
+    { name: "Safety incidents", detail: "Any reportable safety events and the actions taken." },
+    { name: "Asset inventory and warranty", detail: "Installed assets, serial records and warranty status." },
+  ];
+
+  return (
+    <>
+      <section className="content-band">
+        <div className="site-container">
+          <SectionIntro
+            eyebrow="Transparency for Public Agencies"
+            title="Reporting a procurement committee can audit."
+            summary="Government EV infrastructure needs operating clarity, not only equipment delivery. The report types below can be produced for public agencies and institutional owners. Every sample is illustrative until connected to authorised project data."
+          />
+          <div className="matrix-grid">
+            {reports.map((report) => (
+              <article className="matrix-card" key={report.name}>
+                <h3>{report.name}</h3>
+                <p>{report.detail}</p>
+                <p className="assumption-note">Illustrative sample report</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="content-band content-band--warm">
+        <div className="site-container two-column">
+          <div>
+            <SectionIntro
+              eyebrow="Data and Access"
+              title="Role-based access and exportable records."
+              summary="Reports can be provided through role-based access with export to common formats for internal review, subject to a formal technical and data-governance discussion."
+            />
+            <ul className="check-list">
+              <li>Role-based access for agency, operator and auditor</li>
+              <li>Exportable records for internal MIS and audit</li>
+              <li>Defined reporting cadence agreed with the agency</li>
+              <li>Data ownership and retention set per project</li>
+            </ul>
+          </div>
+          <div className="evidence-box">
+            <h2>Before Live Reporting</h2>
+            <p>
+              Live dashboards require a commissioned project, connected chargers
+              and a data-governance agreement. Until then, samples are provided
+              for evaluation only.
+            </p>
+            <Link className="button button--primary" href="/contact/government-project-desk">
+              Request a Reporting Walkthrough
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function ProjectDevelopmentPage() {
+  return (
+    <>
+      <section className="content-band">
+        <div className="site-container">
+          <SectionIntro
+            eyebrow="Methodology"
+            title="A stage-gated method built for administrative discipline."
+            summary="Each stage produces documented decisions, owners and dependencies before the project moves forward. This lets an agency evaluate readiness at every gate rather than committing to an unproven rollout."
+          />
+          <ol className="numbered-flow">
+            {lifecycleSteps.map((step, index) => (
+              <li key={step}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <h3>{step}</h3>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+      <section className="content-band content-band--warm">
+        <div className="site-container two-column">
+          <SiteReadinessChecklist />
+          <div className="evidence-box">
+            <h2>Responsibility at Each Gate</h2>
+            <p>
+              A responsibility matrix identifies the agency, land-owning body,
+              DISCOM, EPC, manufacturing, operations and payment roles for every
+              stage, so accountability is clear before works begin.
+            </p>
+            <Link className="button button--secondary" href="/ppp-commercial-models">
+              Review Commercial Models
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function CompliancePage() {
+  const standards = [
+    "Ministry of Power EV charging infrastructure guidelines",
+    "Central Electricity Authority (CEA) safety and connectivity requirements",
+    "Applicable BIS / IS standards for the relevant equipment",
+    "State EV policies and SERC / DISCOM requirements",
+    "Open communication protocols and interoperability (OCPP, and OCPI/UEI where applicable)",
+    "PM E-DRIVE-related requirements, where applicable to the project",
+  ];
+
+  return (
+    <>
+      <section className="content-band">
+        <div className="site-container two-column">
+          <div>
+            <SectionIntro
+              eyebrow="Design Intent"
+              title="Projects are designed to align with applicable standards."
+              summary="EHUB Bharat designs and delivers projects to align with current, applicable requirements. Alignment is a design commitment; it is not a claim of certification unless supported by a specific, unexpired certificate."
+            />
+            <ul className="check-list">
+              {standards.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="evidence-box">
+            <h2>Certification Register</h2>
+            <p>
+              Product and company certifications (for example BIS, ARAI, ICAT,
+              ISO, NABL, IEC, EMC, IP or IK) are published here only with the
+              certificate number, scope, issue date and expiry date once
+              approved evidence is supplied.
+            </p>
+            <p className="assumption-note">
+              Status: verification required. No certification is claimed until
+              its evidence is recorded.
+            </p>
+            <Link className="button button--secondary" href="/tender-rfp-desk">
+              Request Compliance Documents
+            </Link>
+          </div>
+        </div>
+      </section>
+      <section className="content-band content-band--warm">
+        <div className="site-container">
+          <SectionIntro
+            eyebrow="Procurement Integrity"
+            title="No implied endorsement or unverified status."
+            summary="EHUB Bharat does not use the State Emblem, ministry seals or government devices, and does not describe itself as government approved, empanelled or certified without current, verifiable evidence and legal approval."
+          />
+        </div>
+      </section>
+    </>
+  );
+}
+
+function LeadershipPage() {
+  return (
+    <>
+      <section className="content-band">
+        <div className="site-container two-column">
+          <div>
+            <SectionIntro
+              eyebrow="Governance"
+              title="Accountable governance for public-sector delivery."
+              summary="EHUB Bharat's delivery model is built around clear ownership, documented decisions and procurement integrity. Individual leadership profiles are published only after names, roles, biographies and photographs are formally approved."
+            />
+            <ul className="check-list">
+              <li>Named project ownership for every government engagement</li>
+              <li>Separation of delivery and quality sign-off</li>
+              <li>Anti-bribery and procurement-integrity commitment</li>
+              <li>Documented decisions and auditable records</li>
+            </ul>
+          </div>
+          <div className="evidence-box">
+            <h2>Leadership Profiles</h2>
+            <p>
+              Executive and technical-team profiles will appear here with role,
+              responsibility and relevant experience once approved for
+              publication.
+            </p>
+            <p className="assumption-note">
+              Status: verification required (names, titles, biographies and
+              photographs pending approval).
+            </p>
+            <Link className="button button--secondary" href="/contact/government-project-desk">
+              Request Leadership Introductions
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function CareersPage() {
+  const areas = [
+    "Manufacturing and quality",
+    "Electrical and power engineering",
+    "Project delivery and site management",
+    "Charging software and platform",
+    "Field operations and maintenance",
+    "Government and institutional business development",
+  ];
+
+  return (
+    <section className="content-band">
+      <div className="site-container two-column">
+        <div>
+          <SectionIntro
+            eyebrow="Careers"
+            title="Help build India's public EV charging capability."
+            summary="EHUB Bharat brings together manufacturing, engineering, project delivery, software and field operations. We register interest across these areas and respond as specific roles open."
+          />
+          <ul className="capability-grid">
+            {areas.map((area) => (
+              <li key={area}>{area}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="contact-card">
+          <h2>Register Interest</h2>
+          <p>
+            Share your area of interest and experience. Please do not send
+            sensitive personal documents by email.
+          </p>
+          <a href={`mailto:${brand.email}?subject=Careers%20-%20EHUB%20Bharat`}>{brand.email}</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ResourcesPage() {
+  const docs = [
+    { label: "Government capability statement (PDF)", href: downloads.capability },
+    { label: "Manufacturing profile (PDF)", href: downloads.manufacturing },
+    { label: "Printer-friendly government project summary (PDF)", href: downloads.projectSummary },
+  ];
+
+  return (
+    <>
+      <section className="content-band">
+        <div className="site-container tender-grid">
+          <div>
+            <SectionIntro
+              eyebrow="Public Downloads"
+              title="Documents for government and institutional evaluation."
+              summary="These reviewed documents can be downloaded directly. Confidential or project-specific material is shared through the Government Project Desk after review."
+            />
+            <div className="download-panel download-panel--large">
+              {docs.map((doc) => (
+                <Link key={doc.href} href={doc.href}>
+                  {doc.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div className="evidence-box">
+            <h2>Controlled Documents</h2>
+            <p>
+              Product datasheets, certifications, registrations and project
+              records are provided on request through the Tender &amp; RFP Desk.
+            </p>
+            <Link className="button button--primary" href="/tender-rfp-desk">
+              Open the Tender &amp; RFP Desk
+            </Link>
+          </div>
+        </div>
+      </section>
+      <section className="content-band content-band--warm">
+        <div className="site-container">
+          <SectionIntro
+            eyebrow="Planning Notes"
+            title="Executive notes for public EV infrastructure planning."
+            summary="Dated, jurisdiction-aware planning notes — not legal advice."
+          />
+          <div className="article-grid">
+            {knowledgeArticles.map((article) => (
+              <article className="article-card" key={article.slug}>
+                <p>{article.jurisdiction} - Reviewed {article.reviewed}</p>
+                <h3>{article.title}</h3>
+                <p>{article.summary}</p>
+                <Link href="/knowledge-centre">Read in Knowledge Centre</Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function SitemapPage() {
+  const groups = [
+    {
+      heading: "Government",
+      links: [
+        { href: "/government-ev-infrastructure", label: "Government Projects" },
+        { href: "/project-development", label: "Project Development" },
+        { href: "/operations-maintenance", label: "Operations & Maintenance" },
+        { href: "/government-mis-reporting", label: "Government MIS & Reporting" },
+        { href: "/ppp-commercial-models", label: "PPP & Commercial Models" },
+        { href: "/tender-rfp-desk", label: "Tender & RFP Desk" },
+        { href: "/projects", label: "Projects & Framework" },
+      ],
+    },
+    {
+      heading: "Solutions & products",
+      links: [
+        ...governmentSolutions.map((s) => ({ href: `/government/${s.slug}`, label: s.title })),
+        { href: "/ev-chargers", label: "EV Chargers" },
+        ...chargerCategories.map((c) => ({ href: `/ev-chargers/${c.slug}`, label: c.title })),
+        { href: "/energy-bess", label: "Energy & BESS" },
+      ],
+    },
+    {
+      heading: "Company",
+      links: [
+        { href: "/about", label: "About" },
+        { href: "/manufacturing", label: "Manufacturing" },
+        { href: "/technology", label: "Technology" },
+        { href: "/compliance-certifications", label: "Compliance & Certifications" },
+        { href: "/leadership", label: "Leadership & Governance" },
+        { href: "/careers", label: "Careers" },
+        { href: "/contact/government-project-desk", label: "Contact" },
+      ],
+    },
+    {
+      heading: "Resources & private sector",
+      links: [
+        { href: "/resources", label: "Resources & Downloads" },
+        { href: "/knowledge-centre", label: "Knowledge Centre" },
+        { href: "/private-sector-solutions", label: "Private-Sector Solutions" },
+        { href: "/apartments", label: "Apartments" },
+        { href: "/private-fleets", label: "Private Fleets" },
+        { href: "/retail-hosts", label: "Retail Hosts" },
+        { href: "/franchise", label: "Franchise" },
+      ],
+    },
+    {
+      heading: "Legal & trust",
+      links: [
+        { href: "/privacy", label: "Privacy Policy" },
+        { href: "/terms", label: "Terms of Use" },
+        { href: "/cookies", label: "Cookie Notice" },
+        { href: "/accessibility", label: "Accessibility Statement" },
+        { href: "/disclaimer", label: "Disclaimer" },
+        { href: "/security", label: "Security & Responsible Disclosure" },
+      ],
+    },
+  ];
+
+  return (
+    <section className="content-band">
+      <div className="site-container">
+        <div className="sitemap-grid">
+          {groups.map((group) => (
+            <nav key={group.heading} aria-label={group.heading}>
+              <h2>{group.heading}</h2>
+              <ul>
+                {group.links.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href}>{link.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -93,15 +93,19 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              <Link href="/project-development">Project Development</Link>
+            </li>
+            <li>
+              <Link href="/operations-maintenance">Operations & Maintenance</Link>
+            </li>
+            <li>
+              <Link href="/government-mis-reporting">MIS & Reporting</Link>
+            </li>
+            <li>
               <Link href="/tender-rfp-desk">Tender & RFP Desk</Link>
             </li>
             <li>
-              <Link href="/ppp-commercial-models">
-                Procurement Models
-              </Link>
-            </li>
-            <li>
-              <Link href="/projects">Project Framework</Link>
+              <Link href="/ppp-commercial-models">Procurement Models</Link>
             </li>
           </ul>
         </div>
@@ -112,13 +116,19 @@ export function Footer() {
               <Link href="/manufacturing">Manufacturing</Link>
             </li>
             <li>
-              <Link href="/ev-chargers">EV Chargers</Link>
-            </li>
-            <li>
               <Link href="/technology">Technology</Link>
             </li>
             <li>
-              <Link href="/energy-bess">Energy & BESS</Link>
+              <Link href="/compliance-certifications">Compliance</Link>
+            </li>
+            <li>
+              <Link href="/leadership">Leadership</Link>
+            </li>
+            <li>
+              <Link href="/resources">Resources</Link>
+            </li>
+            <li>
+              <Link href="/careers">Careers</Link>
             </li>
           </ul>
         </div>
@@ -138,9 +148,11 @@ export function Footer() {
         <nav aria-label="Legal links">
           <Link href="/privacy">Privacy</Link>
           <Link href="/terms">Terms</Link>
+          <Link href="/cookies">Cookies</Link>
           <Link href="/disclaimer">Disclaimer</Link>
           <Link href="/accessibility">Accessibility</Link>
           <Link href="/security">Security</Link>
+          <Link href="/sitemap">Sitemap</Link>
         </nav>
       </div>
       <div className="site-container footer-note">
