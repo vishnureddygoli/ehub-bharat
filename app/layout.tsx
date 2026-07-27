@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { brand } from "./data/site";
@@ -38,10 +38,17 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
+  manifest: "/manifest.webmanifest",
   icons: {
-    icon: brand.icon,
-    shortcut: brand.icon,
-    apple: brand.icon,
+    icon: [
+      { url: "/favicon.ico", sizes: "16x16 32x32 48x48" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   openGraph: {
     title: "EHUB Bharat | Government EV Infrastructure",
@@ -53,10 +60,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-government-projects.png",
+        url: "/og-default.png",
         width: 1200,
         height: 630,
-        alt: "EHUB Bharat government EV infrastructure",
+        alt: "EHUB Bharat — government EV infrastructure and EV charger manufacturing",
       },
     ],
   },
@@ -65,8 +72,16 @@ export const metadata: Metadata = {
     title: "EHUB Bharat | Government EV Infrastructure",
     description:
       "Plan, manufacture, deploy and operate public EV charging infrastructure with EHUB Bharat.",
-    images: ["/og-government-projects.png"],
+    images: ["/og-default.png"],
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#101820" },
+  ],
+  colorScheme: "light",
 };
 
 export default function RootLayout({

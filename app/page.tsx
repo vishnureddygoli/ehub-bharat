@@ -330,7 +330,7 @@ function organizationSchema() {
       name: brand.name,
       legalName: brand.legalName,
       url: brand.url,
-      logo: `${brand.url}${brand.logo}`,
+      logo: `${brand.url}/brand/ehub-bharat-horizontal-1024.png`,
       email: brand.email,
       telephone: brand.phone,
       address: {

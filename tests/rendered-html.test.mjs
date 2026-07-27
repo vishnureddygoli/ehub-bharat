@@ -147,7 +147,7 @@ describe("EHUB Bharat production smoke test", () => {
     const json = await response.json();
     assert.equal(response.status, 200);
     assert.equal(json.ok, true);
-    assert.match(json.reference, /^EHB-GOV-\d{8}-[A-Z0-9]{6}$/);
+    assert.match(json.reference, /^EHB-GOV-\d{8}-[A-F0-9]{8}$/);
   });
 
   test("sitemap and robots are crawlable", async () => {
