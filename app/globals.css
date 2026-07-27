@@ -8,10 +8,11 @@
   --muted: #5d6875;
   --line: #d9e1e6;
   --deep: #101820;
-  --graphite: #222a31;
-  --green: #13795b;
-  --green-dark: #0b5f48;
-  --red: #c5362d;
+  --graphite: #20252b;
+  --brand: #d71920;
+  --brand-dark: #a70f18;
+  --brand-tint: #fdecec;
+  --red: #d71920;
   --gold: #c28a31;
   --steel: #e6edf0;
   --focus: #f3b23c;
@@ -66,8 +67,8 @@ button {
 }
 
 ::selection {
-  background: var(--gold);
-  color: var(--deep);
+  background: var(--brand);
+  color: #fff;
 }
 
 .skip-link {
@@ -170,7 +171,7 @@ button {
 }
 
 .nav-cta {
-  background: var(--green);
+  background: var(--brand);
   color: #fff;
   padding: 11px 14px;
   font-size: 0.9rem;
@@ -215,9 +216,9 @@ button {
 .page-hero {
   overflow: hidden;
   background:
-    linear-gradient(90deg, rgba(19, 121, 91, 0.18) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(19, 121, 91, 0.12) 1px, transparent 1px),
-    linear-gradient(135deg, #101820 0%, #222a31 54%, #301f1b 100%);
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(135deg, #101820 0%, #20252b 55%, #2a1c1e 100%);
   background-size: 48px 48px, 48px 48px, auto;
   color: #fff;
 }
@@ -233,7 +234,7 @@ button {
 
 .eyebrow {
   margin: 0 0 14px;
-  color: var(--green);
+  color: var(--brand);
   font-size: 0.86rem;
   font-weight: 900;
   text-transform: uppercase;
@@ -242,7 +243,7 @@ button {
 .page-hero .eyebrow,
 .content-band--ink .eyebrow,
 .final-cta .eyebrow {
-  color: #9be3c7;
+  color: #f6b0b3;
 }
 
 h1,
@@ -350,7 +351,7 @@ p {
   position: absolute;
   height: 3px;
   border-radius: 3px;
-  background: linear-gradient(90deg, var(--green), var(--gold), var(--red));
+  background: linear-gradient(90deg, var(--brand-dark), var(--brand));
   transform-origin: left center;
 }
 
@@ -432,7 +433,7 @@ p {
   width: 34px;
   height: 4px;
   border-radius: 4px;
-  background: linear-gradient(90deg, var(--green), var(--gold));
+  background: linear-gradient(90deg, var(--brand-dark), var(--brand));
 }
 
 .proof-strip p {
@@ -454,7 +455,7 @@ p {
 
 .content-band--assurance {
   background:
-    linear-gradient(180deg, rgba(19, 121, 91, 0.06), rgba(194, 138, 49, 0.08)),
+    linear-gradient(180deg, rgba(215, 25, 32, 0.04), rgba(32, 37, 43, 0.03)),
     var(--surface);
 }
 
@@ -668,7 +669,7 @@ p {
   width: 9px;
   height: 9px;
   border-radius: 2px;
-  background: var(--green);
+  background: var(--brand);
 }
 
 .selector-block,
@@ -706,8 +707,8 @@ p {
 .selector-list button.is-active,
 .timeline-grid button.is-active,
 .segmented-control button.is-active {
-  border-color: var(--green);
-  background: var(--green);
+  border-color: var(--brand);
+  background: var(--brand);
   color: #fff;
 }
 
@@ -798,9 +799,9 @@ address,
   border: 1px solid var(--line);
   border-radius: 8px;
   background:
-    linear-gradient(90deg, rgba(19, 121, 91, 0.12) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(19, 121, 91, 0.12) 1px, transparent 1px),
-    #f7fbf9;
+    linear-gradient(90deg, rgba(32, 37, 43, 0.06) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(32, 37, 43, 0.06) 1px, transparent 1px),
+    #f4f7f9;
   background-size: 36px 36px;
   padding: 18px;
 }
@@ -809,10 +810,10 @@ address,
   display: grid;
   min-height: 140px;
   place-items: center;
-  border: 1px solid rgba(19, 121, 91, 0.3);
+  border: 1px solid rgba(215, 25, 32, 0.28);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.88);
-  color: var(--green-dark);
+  color: var(--brand-dark);
   font-weight: 900;
   text-align: center;
 }
@@ -842,7 +843,7 @@ address,
 .timeline-grid button span {
   display: block;
   margin-bottom: 9px;
-  color: #9be3c7;
+  color: var(--brand-dark);
   font-size: 0.78rem;
 }
 
@@ -893,7 +894,7 @@ address,
 }
 
 .dashboard-header span {
-  color: #9be3c7;
+  color: #f6b0b3;
   font-size: 0.86rem;
   font-weight: 800;
 }
@@ -916,7 +917,7 @@ address,
   width: 42px;
   height: 5px;
   border-radius: 4px;
-  background: linear-gradient(90deg, var(--green), var(--gold));
+  background: linear-gradient(90deg, var(--brand-dark), var(--brand));
 }
 
 .dashboard-grid p {
@@ -995,7 +996,7 @@ address,
 .article-card a,
 .compact-link-grid a,
 .download-panel a {
-  color: var(--green-dark);
+  color: var(--brand-dark);
   font-weight: 850;
 }
 
@@ -1043,7 +1044,7 @@ address,
   width: 18px;
   height: 18px;
   margin-top: 3px;
-  accent-color: var(--green);
+  accent-color: var(--brand);
 }
 
 .readiness-score {
@@ -1121,7 +1122,7 @@ address,
   right: -10px;
   width: 10px;
   height: 3px;
-  background: var(--green);
+  background: var(--brand);
 }
 
 .project-form {
@@ -1188,7 +1189,7 @@ address,
 }
 
 .form-status--success {
-  color: var(--green-dark);
+  color: var(--brand-dark);
   font-weight: 800;
 }
 
@@ -1227,7 +1228,7 @@ address,
 }
 
 .contact-card a {
-  color: var(--green-dark);
+  color: var(--brand-dark);
   font-weight: 850;
 }
 
