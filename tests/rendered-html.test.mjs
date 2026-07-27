@@ -159,6 +159,69 @@ describe("EHUB Bharat production smoke test", () => {
     assert.match(await sitemap.text(), /government-ev-infrastructure/);
     assert.match(await robots.text(), /Sitemap:/);
   });
+
+  test("new pages return 200 with exactly one H1, a title and a canonical", async () => {
+    const routes = [
+      "/operations-maintenance",
+      "/government-mis-reporting",
+      "/project-development",
+      "/compliance-certifications",
+      "/leadership",
+      "/careers",
+      "/resources",
+      "/sitemap",
+      "/cookies",
+      "/products",
+      "/about",
+    ];
+
+    for (const route of routes) {
+      const response = await fetch(`${baseUrl}${route}`);
+      assert.equal(response.status, 200, route);
+      const html = await response.text();
+      const h1Count = (html.match(/<h1[\s>]/g) || []).length;
+      assert.equal(h1Count, 1, `${route} should have exactly one H1 (found ${h1Count})`);
+      assert.match(html, /<link rel="canonical"/, `${route} should have a canonical link`);
+      assert.match(html, /<title>/, `${route} should have a title`);
+    }
+  });
+
+  test("structured data blocks are valid JSON-LD with expected types", async () => {
+    const assertType = async (path, expectedType) => {
+      const html = await (await fetch(`${baseUrl}${path}`)).text();
+      const blocks = [
+        ...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs),
+      ].map((match) => match[1]);
+      assert.ok(blocks.length, `${path} should include JSON-LD`);
+      const parsed = blocks.flatMap((raw) => {
+        const value = JSON.parse(raw); // throws on invalid JSON
+        return Array.isArray(value) ? value : [value];
+      });
+      const types = parsed.map((entry) => entry["@type"]);
+      assert.ok(types.includes(expectedType), `${path} should include ${expectedType} (got ${types.join(", ")})`);
+    };
+
+    await assertType("/", "Corporation");
+    await assertType("/government-ev-infrastructure", "FAQPage");
+    await assertType("/manufacturing", "BreadcrumbList");
+  });
+
+  test("internal links on the homepage resolve (no broken links)", async () => {
+    const html = await (await fetch(`${baseUrl}/`)).text();
+    const hrefs = [
+      ...new Set(
+        [...html.matchAll(/href="(\/[^"#?]*)"/g)]
+          .map((match) => match[1])
+          .filter((href) => !href.startsWith("/_next") && !href.startsWith("//")),
+      ),
+    ];
+
+    assert.ok(hrefs.length > 5, "homepage should expose internal links");
+    for (const href of hrefs) {
+      const response = await fetch(`${baseUrl}${href}`, { redirect: "manual" });
+      assert.ok([200, 301].includes(response.status), `${href} returned ${response.status}`);
+    }
+  });
 });
 
 async function waitForServer() {
