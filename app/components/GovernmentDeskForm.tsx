@@ -1,7 +1,7 @@
 "use client";
 
 import type { FormEvent, HTMLAttributes } from "react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const projectCategories = [
   "Statewide charging network",
@@ -56,6 +56,15 @@ export function GovernmentDeskForm() {
     state: "idle",
     message: "",
   });
+  const statusRef = useRef<HTMLDivElement>(null);
+
+  // Move keyboard/screen-reader focus to the result once submission resolves,
+  // so applicants are not left at the submit button without feedback.
+  useEffect(() => {
+    if (status.state === "success" || status.state === "error") {
+      statusRef.current?.focus();
+    }
+  }, [status.state]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -150,7 +159,13 @@ export function GovernmentDeskForm() {
       <button className="button button--primary" type="submit" disabled={status.state === "submitting"}>
         Submit Government Project Enquiry
       </button>
-      <div className={`form-status form-status--${status.state}`} role="status" aria-live="polite">
+      <div
+        ref={statusRef}
+        tabIndex={-1}
+        className={`form-status form-status--${status.state}`}
+        role={status.state === "error" ? "alert" : "status"}
+        aria-live={status.state === "error" ? "assertive" : "polite"}
+      >
         {status.message}
         {status.state === "success" ? <strong> Reference: {status.reference}</strong> : null}
       </div>
