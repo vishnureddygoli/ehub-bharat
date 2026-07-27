@@ -12,8 +12,6 @@ const brand = join(root, "public", "brand");
 const pub = join(root, "public");
 
 const RED = "#D71920";
-const GRAPHITE = "#20252B";
-const INK = "#101820";
 
 const horizontalSvg = readFileSync(join(brand, "ehub-bharat-horizontal.svg"));
 const iconSvg = readFileSync(join(brand, "ehub-bharat-icon.svg"));
