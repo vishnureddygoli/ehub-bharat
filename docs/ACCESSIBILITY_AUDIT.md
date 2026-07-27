@@ -18,9 +18,9 @@ Method: static code review + build-time render inspection. Manual SR/keyboard + 
 
 | ID | Issue | WCAG | Severity | Stage |
 |---|---|---|---|---|
-| A1 | No `prefers-reduced-motion` guard for `scroll-behavior` / transitions | 2.3.3 | Medium | 5 |
-| A2 | Form lacks per-field error identification, `aria-invalid`, and an error summary; errors are single combined `role=status` only | 3.3.1 / 3.3.3 | High | 6 |
-| A3 | On submit success, focus not moved to confirmation/reference | 2.4.3 / 4.1.3 | Medium | 6 |
+| A1 | ~~No `prefers-reduced-motion` guard~~ **DONE** — media query disables smooth scroll + collapses animations/transitions | 2.3.3 | — | ✓ |
+| A2 | Form error identification: native HTML5 `required` gives per-field browser validation; server errors now announced assertively (`role=alert`). Per-field `aria-invalid` + client error summary still **outstanding** | 3.3.1 / 3.3.3 | Medium | future |
+| A3 | ~~Focus not moved on submit~~ **DONE** — focus moves to the result region on success/error | 2.4.3 / 4.1.3 | — | ✓ |
 | A4 | Mobile nav via `<details>` — verify Escape close + `summary` SR name; ensure not a keyboard trap | 2.1.1 / 2.1.2 | Medium | 5/6 |
 | A5 | Colour contrast must be re-verified after palette change (red #D71920 on white ≈ 4.9:1 for large text; verify body-size usages use graphite not red) | 1.4.3 | High | 5 |
 | A6 | Utility-bar links on dark `--deep` — verify contrast + `overflow-x:auto` reachable by keyboard | 1.4.3 / 2.1.1 | Medium | 5 |
