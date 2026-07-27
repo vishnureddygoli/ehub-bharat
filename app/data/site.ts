@@ -277,6 +277,52 @@ export const deliveryPillars = [
   },
 ];
 
+export const contractableRoles = [
+  {
+    role: "EV charger manufacturer / assembler",
+    scope:
+      "EV chargers produced or assembled at the Telangana facility, presented through verified product categories.",
+  },
+  {
+    role: "EV charging infrastructure developer",
+    scope:
+      "Planning, site and electrical feasibility, charger-mix and phased network design for public assets.",
+  },
+  {
+    role: "EPC and systems-integration partner",
+    scope:
+      "Civil, electrical, charger and software integration through to testing, commissioning and handover.",
+  },
+  {
+    role: "Charge Point Operator (where contracted)",
+    scope:
+      "Network operation, monitoring, payments and reporting where the project engages EHUB Bharat to operate.",
+  },
+  {
+    role: "Charger Management System / digital-platform provider",
+    scope:
+      "OCPP-based operations, tariffs, access control, settlement and government MIS where supported.",
+  },
+  {
+    role: "Operations and maintenance partner",
+    scope:
+      "Preventive and corrective maintenance, fault escalation and SLA reporting for the agreed period and scope.",
+  },
+  {
+    role: "Solar and BESS integration partner",
+    scope:
+      "Renewable and storage integration for peak management and resilience, subject to engineering review.",
+  },
+  {
+    role: "Technical adviser",
+    scope:
+      "Site feasibility, power planning, DPR support and network-rollout advisory without an equipment commitment.",
+  },
+];
+
+export const chargingTimeCaveat =
+  "Any charging-time example depends on the specific vehicle architecture, battery capacity and state of charge, battery temperature, the vehicle's charging curve, the charger's rated output, available site power and environmental conditions. EHUB Bharat does not publish generic charging-time claims without stating these assumptions.";
+
 export const governmentSolutions = [
   {
     slug: "state-city-ev-networks",

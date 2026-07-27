@@ -25,7 +25,9 @@ import {
 import {
   brand,
   chargerCategories,
+  chargingTimeCaveat,
   commercialModels,
+  contractableRoles,
   deliveryPillars,
   downloads,
   governmentSolutions,
@@ -683,6 +685,9 @@ function ChargerCategoryPage({
           </Link>
         </div>
       </div>
+      <div className="site-container">
+        <p className="assumption-note">{chargingTimeCaveat}</p>
+      </div>
     </section>
   );
 }
@@ -937,45 +942,64 @@ function KnowledgeCentrePage() {
 
 function AboutPage() {
   return (
-    <section className="content-band">
-      <div className="site-container two-column">
-        <div>
+    <>
+      <section className="content-band">
+        <div className="site-container two-column">
+          <div>
+            <SectionIntro
+              eyebrow="Company"
+              title="A modern Indian infrastructure company for EV charging deployment."
+              summary="EHUB Bharat's public website is rebuilt around government and institutional decision-making, with private-sector opportunities retained as a secondary pathway."
+            />
+            <ul className="check-list">
+              {deliveryPillars.map((pillar) => (
+                <li key={pillar.title}>
+                  <strong>{pillar.title}:</strong> {pillar.summary}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="evidence-box">
+            <h2>Entity Record</h2>
+            <dl className="definition-list">
+              <div>
+                <dt>Brand name</dt>
+                <dd>{brand.name}</dd>
+              </div>
+              <div>
+                <dt>Public email</dt>
+                <dd>{brand.email}</dd>
+              </div>
+              <div>
+                <dt>Public telephone</dt>
+                <dd>{brand.phone}</dd>
+              </div>
+              <div>
+                <dt>Manufacturing facility</dt>
+                <dd>{manufacturingAddress}</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </section>
+      <section className="content-band content-band--warm">
+        <div className="site-container">
           <SectionIntro
-            eyebrow="Company"
-            title="A modern Indian infrastructure company for EV charging deployment."
-            summary="EHUB Bharat's public website is rebuilt around government and institutional decision-making, with private-sector opportunities retained as a secondary pathway."
+            eyebrow="Roles We Can Contract For"
+            title="Clear roles, not blurred claims."
+            summary="A government decision-maker should know exactly what EHUB Bharat can contractually deliver. Each role below is engaged on its own terms, subject to project scope and approvals."
           />
-          <ul className="check-list">
-            {deliveryPillars.map((pillar) => (
-              <li key={pillar.title}>
-                <strong>{pillar.title}:</strong> {pillar.summary}
-              </li>
+          <div className="roles-grid">
+            {contractableRoles.map((item) => (
+              <article className="role-card" key={item.role}>
+                <h3>{item.role}</h3>
+                <p>{item.scope}</p>
+              </article>
             ))}
-          </ul>
+          </div>
         </div>
-        <div className="evidence-box">
-          <h2>Entity Record</h2>
-          <dl className="definition-list">
-            <div>
-              <dt>Brand name</dt>
-              <dd>{brand.name}</dd>
-            </div>
-            <div>
-              <dt>Public email</dt>
-              <dd>{brand.email}</dd>
-            </div>
-            <div>
-              <dt>Public telephone</dt>
-              <dd>{brand.phone}</dd>
-            </div>
-            <div>
-              <dt>Manufacturing facility</dt>
-              <dd>{manufacturingAddress}</dd>
-            </div>
-          </dl>
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 

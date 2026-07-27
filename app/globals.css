@@ -517,9 +517,14 @@ p {
 .assurance-grid,
 .matrix-grid,
 .evaluation-grid,
+.roles-grid,
 .briefing-sequence {
   display: grid;
   gap: 18px;
+}
+
+.roles-grid {
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .pillar-grid {
@@ -544,10 +549,26 @@ p {
 .readiness,
 .dashboard-visual,
 .download-panel,
+.role-card,
 .address-panel {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);
+}
+
+.role-card {
+  padding: 22px 22px 24px;
+}
+
+.role-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.02rem;
+}
+
+.role-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
 }
 
 .pillar-card {
@@ -1465,6 +1486,7 @@ address,
   .estimator-grid,
   .dashboard-grid,
   .factory-blueprint,
+  .roles-grid,
   .energy-flow {
     grid-template-columns: 1fr;
   }
