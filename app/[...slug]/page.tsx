@@ -24,6 +24,7 @@ import {
 } from "../components/SiteFrame";
 import {
   brand,
+  caseStudies,
   chargerCategories,
   chargingTimeCaveat,
   commercialModels,
@@ -35,6 +36,7 @@ import {
   knowledgeArticles,
   lifecycleSteps,
   manufacturingAddress,
+  products,
   redirects,
   siteDate,
   technologyCapabilities,
@@ -51,6 +53,7 @@ type StaticPage = {
     | "government"
     | "manufacturing"
     | "chargers"
+    | "products"
     | "technology"
     | "energy"
     | "commercial"
@@ -95,6 +98,14 @@ const staticPages: StaticPage[] = [
     description:
       "AC, DC fast and high-power charging categories for government, institutional, fleet and public charging projects, with product claims controlled by verified datasheets.",
     kind: "chargers",
+  },
+  {
+    path: "/products",
+    eyebrow: "Products",
+    title: "EV Charger Product Portfolio",
+    description:
+      "A scalable product portfolio for public and institutional charging. Individual model specifications are published only when an approved datasheet is available.",
+    kind: "products",
   },
   {
     path: "/technology",
@@ -321,11 +332,23 @@ export function generateStaticParams() {
   const chargerPaths = chargerCategories.map((category) => ({
     slug: ["ev-chargers", category.slug],
   }));
+  const productPaths = products.map((product) => ({
+    slug: ["products", product.slug],
+  }));
+  const caseStudyPaths = caseStudies.map((study) => ({
+    slug: ["projects", study.slug],
+  }));
   const staticPaths = staticPages.map((page) => ({
     slug: page.path.replace(/^\//, "").split("/"),
   }));
 
-  return [...staticPaths, ...governmentPaths, ...chargerPaths];
+  return [
+    ...staticPaths,
+    ...governmentPaths,
+    ...chargerPaths,
+    ...productPaths,
+    ...caseStudyPaths,
+  ];
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
@@ -431,6 +454,32 @@ function resolvePage(path: string): StaticPage | null {
     };
   }
 
+  if (path.startsWith("/products/")) {
+    const slug = path.split("/").pop();
+    const product = products.find((item) => item.slug === slug);
+    if (!product) return null;
+    return {
+      path,
+      eyebrow: product.category,
+      title: product.name,
+      description: product.summary,
+      kind: "products",
+    };
+  }
+
+  if (path.startsWith("/projects/")) {
+    const slug = path.split("/").pop();
+    const study = caseStudies.find((item) => item.slug === slug);
+    if (!study) return null;
+    return {
+      path,
+      eyebrow: `Case Study - ${study.status}`,
+      title: study.title,
+      description: study.scope,
+      kind: "projects",
+    };
+  }
+
   return null;
 }
 
@@ -443,6 +492,14 @@ function renderPage(page: StaticPage, path: string) {
     const category = chargerCategories.find((item) => path.endsWith(item.slug));
     return category ? <ChargerCategoryPage category={category} /> : null;
   }
+  if (path.startsWith("/products/")) {
+    const product = products.find((item) => path.endsWith(item.slug));
+    return product ? <ProductDetailPage product={product} /> : null;
+  }
+  if (path.startsWith("/projects/")) {
+    const study = caseStudies.find((item) => path.endsWith(item.slug));
+    return study ? <CaseStudyPage study={study} /> : null;
+  }
 
   switch (page.kind) {
     case "government":
@@ -451,6 +508,8 @@ function renderPage(page: StaticPage, path: string) {
       return <ManufacturingPage />;
     case "chargers":
       return <ChargersPage />;
+    case "products":
+      return <ProductsIndexPage />;
     case "technology":
       return <TechnologyPage />;
     case "energy":
@@ -753,9 +812,14 @@ function ChargersPage() {
             procurement teams may request the latest reviewed product
             documentation through the Tender & RFP Desk.
           </p>
-          <Link className="button button--secondary" href="/tender-rfp-desk">
-            Request Approved Datasheets
-          </Link>
+          <div className="button-row">
+            <Link className="button button--secondary" href="/products">
+              View Product Portfolio
+            </Link>
+            <Link className="button button--secondary" href="/tender-rfp-desk">
+              Request Approved Datasheets
+            </Link>
+          </div>
         </div>
       </div>
     </section>
@@ -802,6 +866,148 @@ function ChargerCategoryPage({
       </div>
       <div className="site-container">
         <p className="assumption-note">{chargingTimeCaveat}</p>
+      </div>
+    </section>
+  );
+}
+
+function ProductsIndexPage() {
+  return (
+    <section className="content-band">
+      <div className="site-container">
+        {products.length ? (
+          <>
+            <SectionIntro
+              eyebrow="Product Portfolio"
+              title="Published EV charger models."
+              summary="Each model below is backed by an approved datasheet. Request the latest reviewed documentation through the Tender & RFP Desk."
+            />
+            <div className="solution-card-grid">
+              {products.map((product) => (
+                <article className="solution-card" key={product.slug}>
+                  <p className="eyebrow">{product.category}</p>
+                  <h3>{product.name}</h3>
+                  <p>{product.summary}</p>
+                  <Link href={`/products/${product.slug}`}>View specifications</Link>
+                </article>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="two-column">
+            <div>
+              <SectionIntro
+                eyebrow="Product Portfolio"
+                title="A scalable portfolio, published only with evidence."
+                summary="EHUB Bharat presents AC, DC fast and high-power charging as categories. Individual model pages — with rated output, connectors, protection, OCPP version, dimensions, warranty and certifications — are published as approved datasheets become available, so no unverified specification is shown."
+              />
+              <div className="compact-link-grid">
+                {chargerCategories.map((category) => (
+                  <Link key={category.slug} href={`/ev-chargers/${category.slug}`}>
+                    {category.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <div className="evidence-box">
+              <h2>Request Product Documentation</h2>
+              <p>
+                Public procurement teams can request the latest reviewed product
+                datasheets, ratings and compliance evidence through the Tender &amp;
+                RFP Desk.
+              </p>
+              <p className="assumption-note">
+                Status: model specifications require approved datasheets before
+                publication.
+              </p>
+              <Link className="button button--primary" href="/tender-rfp-desk">
+                Request Approved Datasheets
+              </Link>
+            </div>
+          </div>
+        )}
+        <div className="charging-caveat">
+          <p className="assumption-note">{chargingTimeCaveat}</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProductDetailPage({ product }: { product: (typeof products)[number] }) {
+  return (
+    <>
+      <section className="content-band">
+        <div className="site-container two-column">
+          <div>
+            <SectionIntro
+              eyebrow={`${product.category} - ${product.status}`}
+              title={product.name}
+              summary={product.summary}
+            />
+            <p>
+              <strong>Intended segment:</strong> {product.segment}
+            </p>
+            <div className="button-row">
+              {product.datasheetHref ? (
+                <Link className="button button--secondary" href={product.datasheetHref}>
+                  Download Datasheet
+                </Link>
+              ) : null}
+              <Link className="button button--primary" href="/contact/government-project-desk">
+                Request Technical Discussion
+              </Link>
+            </div>
+          </div>
+          <div className="spec-table" role="table" aria-label={`${product.name} specifications`}>
+            <div role="row" className="spec-row spec-row--head">
+              <span role="columnheader">Specification</span>
+              <span role="columnheader">Value</span>
+            </div>
+            {product.specs.map((spec) => (
+              <div role="row" className="spec-row" key={spec.label}>
+                <span role="cell">{spec.label}</span>
+                <span role="cell">{spec.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      {product.certifications.length ? (
+        <section className="content-band content-band--warm">
+          <div className="site-container">
+            <SectionIntro
+              eyebrow="Compliance"
+              title="Certifications for this model."
+              summary="Published with certificate number, scope and expiry where permitted."
+            />
+            <ul className="capability-grid">
+              {product.certifications.map((cert) => (
+                <li key={cert}>{cert}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : null}
+      <section className="content-band">
+        <div className="site-container">
+          <p className="assumption-note">{chargingTimeCaveat}</p>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function CaseStudyPage({ study }: { study: (typeof caseStudies)[number] }) {
+  return (
+    <section className="content-band">
+      <div className="site-container solution-detail-grid">
+        <DetailBlock title="Status" text={study.status} />
+        <DetailBlock title="Location" text={study.location} />
+        {study.client ? <DetailBlock title="Client / agency" text={study.client} /> : null}
+        <DetailBlock title="Scope" text={study.scope} />
+        <DetailBlock title="Public outcome" text={study.outcome} />
+        <DetailBlock title="Date" text={study.date} />
       </div>
     </section>
   );
@@ -920,6 +1126,27 @@ function CommercialModelsPage() {
 function ProjectsPage() {
   return (
     <>
+      {caseStudies.length ? (
+        <section className="content-band">
+          <div className="site-container">
+            <SectionIntro
+              eyebrow="Case Studies"
+              title="Published projects with verified status."
+              summary="Each project carries a controlled status label and is published only with approved records."
+            />
+            <div className="solution-card-grid">
+              {caseStudies.map((study) => (
+                <article className="solution-card" key={study.slug}>
+                  <p className="eyebrow">{study.status}</p>
+                  <h3>{study.title}</h3>
+                  <p>{study.location}</p>
+                  <Link href={`/projects/${study.slug}`}>Read case study</Link>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
       <section className="content-band">
         <div className="site-container two-column">
           <div>
@@ -1635,6 +1862,7 @@ function SitemapPage() {
         ...governmentSolutions.map((s) => ({ href: `/government/${s.slug}`, label: s.title })),
         { href: "/ev-chargers", label: "EV Chargers" },
         ...chargerCategories.map((c) => ({ href: `/ev-chargers/${c.slug}`, label: c.title })),
+        { href: "/products", label: "Product Portfolio" },
         { href: "/energy-bess", label: "Energy & BESS" },
       ],
     },
@@ -1725,6 +1953,25 @@ function schemaForPage(page: StaticPage, path: string) {
       },
     ],
   };
+
+  if (path.startsWith("/products/")) {
+    const product = products.find((item) => path.endsWith(item.slug));
+    if (product) {
+      return [
+        breadcrumb,
+        {
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: product.name,
+          category: product.category,
+          description: product.summary,
+          brand: { "@type": "Brand", name: brand.name },
+          manufacturer: { "@type": "Organization", name: brand.legalName },
+          url: `${brand.url}${path}`,
+        },
+      ];
+    }
+  }
 
   if (path === "/government-ev-infrastructure") {
     return [

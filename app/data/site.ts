@@ -518,6 +518,48 @@ export const chargerCategories = [
   },
 ];
 
+// Scalable product model. Populate `products` only when an approved datasheet
+// exists — never invent ratings, connectors, certifications or protocol versions.
+export type ProductSpec = { label: string; value: string };
+export type Product = {
+  slug: string;
+  name: string;
+  category: "AC Charging" | "DC Fast Charging" | "High-Power Charging";
+  summary: string;
+  segment: string;
+  status: "Published" | "Datasheet pending";
+  specs: ProductSpec[]; // rated output, connectors, input, IP/IK, OCPP, etc.
+  certifications: string[]; // only with certificate number + expiry, once approved
+  datasheetHref?: string;
+};
+
+// Intentionally empty until approved datasheets are supplied. The product-detail
+// template renders the full spec model as soon as a product is added here.
+export const products: Product[] = [];
+
+// Project case studies. Empty until approved project records + client permission
+// exist. The case-study template renders each entry without inventing outcomes.
+export type CaseStudy = {
+  slug: string;
+  title: string;
+  status:
+    | "Operational"
+    | "Commissioned"
+    | "Under Execution"
+    | "Awarded"
+    | "MoU Signed"
+    | "Pilot Approved"
+    | "Proposed"
+    | "Concept / Illustrative";
+  location: string;
+  client?: string; // only with written permission
+  scope: string;
+  outcome: string;
+  date: string;
+};
+
+export const caseStudies: CaseStudy[] = [];
+
 export const technologyCapabilities = [
   "OCPP charger connectivity where supported",
   "Charger and connector status monitoring",
@@ -705,6 +747,7 @@ export const publicPaths = [
   "/ev-chargers/ac",
   "/ev-chargers/dc-fast",
   "/ev-chargers/high-power",
+  "/products",
   "/technology",
   "/energy-bess",
   "/ppp-commercial-models",

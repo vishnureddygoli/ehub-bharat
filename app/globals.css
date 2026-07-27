@@ -578,6 +578,42 @@ p {
   font-size: 1rem;
 }
 
+.spec-table {
+  display: grid;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.spec-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--line);
+}
+
+.spec-row:first-child {
+  border-top: 0;
+}
+
+.spec-row--head {
+  background: var(--surface-2);
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.spec-row span:last-child {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.charging-caveat {
+  margin-top: 28px;
+}
+
 .faq-list {
   display: grid;
   gap: 14px;
