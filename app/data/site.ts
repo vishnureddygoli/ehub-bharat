@@ -585,6 +585,33 @@ export const knowledgeArticles = [
   },
 ];
 
+export const governmentFaqs = [
+  {
+    q: "What does EHUB Bharat do for government projects?",
+    a: "EHUB Bharat supports public EV charging projects across planning, EV charger manufacturing, systems integration, deployment, digital operations and lifecycle maintenance for government, public-sector and institutional owners in India.",
+  },
+  {
+    q: "Where is EHUB Bharat's manufacturing facility?",
+    a: "The EV charger manufacturing facility is at Sy. No. 6E, Dharmojigudem-Dothigudem Road, H/o Lakkaram Village, Choutuppal Mandal, Yadadri Bhuvanagiri District - 508252, Telangana, India.",
+  },
+  {
+    q: "Which commercial models can a public agency use?",
+    a: "Depending on ownership, funding and site conditions, options include government-funded CAPEX, EPC, EPC plus O&M, PPP or concession, revenue sharing, site lease and managed charging service. The final model depends on procurement rules, power availability, utilisation and risk allocation.",
+  },
+  {
+    q: "Does EHUB Bharat claim any government certification or endorsement?",
+    a: "No. EHUB Bharat is a private company and does not describe itself as government approved, empanelled or certified, and does not use official emblems, unless supported by current, verifiable evidence and legal approval.",
+  },
+  {
+    q: "How does a government department start a project conversation?",
+    a: "Use the Government Project Desk to share the project category, procurement stage, site details and documentation needs. Each enquiry receives a reference number and is routed for structured review.",
+  },
+  {
+    q: "Which charging standards and protocols are supported?",
+    a: "EHUB Bharat presents AC, DC fast and high-power charging as categories and supports OCPP-based operations where implemented. Specific model ratings, connectors, certifications and protocol versions are confirmed from approved product datasheets.",
+  },
+];
+
 export const pageIntents = [
   {
     path: "/",

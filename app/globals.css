@@ -578,6 +578,30 @@ p {
   font-size: 1rem;
 }
 
+.faq-list {
+  display: grid;
+  gap: 14px;
+}
+
+.faq-list article {
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--brand);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 20px 22px;
+}
+
+.faq-list h3 {
+  margin: 0 0 8px;
+  font-size: 1.06rem;
+}
+
+.faq-list p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
 .sitemap-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

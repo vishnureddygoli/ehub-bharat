@@ -30,6 +30,7 @@ import {
   contractableRoles,
   deliveryPillars,
   downloads,
+  governmentFaqs,
   governmentSolutions,
   knowledgeArticles,
   lifecycleSteps,
@@ -559,6 +560,23 @@ function GovernmentHub() {
       <section className="content-band content-band--warm">
         <div className="site-container">
           <OperationsPlatformView />
+        </div>
+      </section>
+      <section className="content-band">
+        <div className="site-container">
+          <SectionIntro
+            eyebrow="Government FAQ"
+            title="Answers for public-sector evaluation."
+            summary="Direct answers to the questions departments and committees ask first."
+          />
+          <div className="faq-list">
+            {governmentFaqs.map((faq) => (
+              <article key={faq.q}>
+                <h3>{faq.q}</h3>
+                <p>{faq.a}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
       <section className="final-cta">
@@ -1707,6 +1725,24 @@ function schemaForPage(page: StaticPage, path: string) {
       },
     ],
   };
+
+  if (path === "/government-ev-infrastructure") {
+    return [
+      breadcrumb,
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: governmentFaqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.q,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.a,
+          },
+        })),
+      },
+    ];
+  }
 
   if (page.kind === "knowledge") {
     return [
